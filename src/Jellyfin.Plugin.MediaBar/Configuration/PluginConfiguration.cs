@@ -17,5 +17,7 @@ namespace Jellyfin.Plugin.MediaBar.Configuration
         public bool UseAvatarsFile { get; set; } = true;
 
         public string AvatarsPlaylist { get; set; } = string.Empty;
+
+        public int SlideshowInterval { get; set; } = 7;
     }
 }

@@ -34,6 +34,12 @@
                     <input id="txtVersionString" type="text" is="emby-input" class="emby-input" data-id="txtVersionString" />
                     <div class="fieldDescription">Which version of the jsdelivr'd plugin should be used.</div>
                 </div>
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="txtSlideshowInterval">Slideshow Interval (seconds)</label>
+                    <label class="inputLabel inputLabel-float inputLabelUnfocused" for="txtSlideshowInterval"></label>
+                    <input id="txtSlideshowInterval" type="number" is="emby-input" class="emby-input" data-id="txtSlideshowInterval" />
+                    <div class="fieldDescription">The time in seconds between each slide change.</div>
+                </div>
                 <div class="checkboxContainer checkboxContainer-withDescription">
                     <label class="emby-checkbox-label">
                         <input type="checkbox" id="chkUseAvatarsFile" is="emby-checkbox" class="emby-checkbox" data-id="chkUseAvatarsFile" />
@@ -76,6 +82,7 @@
                         UseAvatarsFile: document.querySelector("[data-id=chkUseAvatarsFile]").checked,
                         AvatarsPlaylist: document.querySelector("[data-id=txtAvatarsPlaylist]").value,
                         VersionString: document.querySelector("[data-id=txtVersionString]").value,
+                        SlideshowInterval: document.querySelector("[data-id=txtSlideshowInterval]").value,
                     };
 
                     window.ApiClient.updatePluginConfiguration(MediaBarConfig.pluginId, config)
@@ -100,6 +107,7 @@
                             }
                             
                             document.querySelector("[data-id=txtVersionString]").value = config.VersionString;
+                            document.querySelector("[data-id=txtSlideshowInterval]").value = config.SlideshowInterval || 7;
                         })
                         .catch(function (error) {
                             console.error(error);
@@ -114,7 +122,6 @@
                 }
             }
 
-            // view.addEventListener("viewshow", function (e) {
             document.querySelector('#mediaBarConfigurationPage').addEventListener("pageshow", function () {
                 MediaBarConfig.init();
             });
