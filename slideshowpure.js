@@ -1078,6 +1078,28 @@ const SlideCreator = {
   },
 
   /**
+   * Creates a favorite button for an item
+   * @param {string} itemId - Item ID
+   * @returns {HTMLElement} Favorite button element
+   */
+
+  createFavoriteButton(item) {
+    const isFavorite = item.UserData && item.UserData.IsFavorite === true;
+
+    const button = SlideUtils.createElement("button", {
+      className: `favorite-button ${isFavorite ? "favorited" : ""}`,
+      tabIndex: "0",
+      onclick: async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await ApiUtils.toggleFavorite(item.Id, button);
+      },
+    });
+
+    return button;
+  },
+
+  /**
    * Creates a placeholder slide for loading
    * @param {string} itemId - Item ID to load
    * @returns {HTMLElement} Placeholder slide element
